@@ -1,33 +1,39 @@
 class Solution:
-    def mergeSort(self, arr, l, r):
-        if l < r:
-            mid = (l + r) // 2
-            self.mergeSort(arr, l, mid)
-            self.mergeSort(arr, mid + 1, r)
-            self.merge(arr, l, mid, r)
+    def merge(self, arr, l, m, r):
+        # Create temporary arrays
+        n1 = m - l + 1
+        n2 = r - m
+        L = arr[l:m+1]
+        R = arr[m+1:r+1]
 
-    def merge(self, arr, l, mid, r):
-        left = arr[l:mid + 1]
-        right = arr[mid + 1:r + 1]
-        
         i = j = 0
         k = l
 
-        while i < len(left) and j < len(right):
-            if left[i] <= right[j]:
-                arr[k] = left[i]
+        # Merge the two halves
+        while i < n1 and j < n2:
+            if L[i] <= R[j]:
+                arr[k] = L[i]
                 i += 1
             else:
-                arr[k] = right[j]
+                arr[k] = R[j]
                 j += 1
             k += 1
 
-        while i < len(left):
-            arr[k] = left[i]
+        # Copy remaining elements
+        while i < n1:
+            arr[k] = L[i]
             i += 1
             k += 1
 
-        while j < len(right):
-            arr[k] = right[j]
+        while j < n2:
+            arr[k] = R[j]
             j += 1
             k += 1
+
+
+    def mergeSort(self, arr, l, r):
+        if l < r:
+            m = (l + r) // 2
+            self.mergeSort(arr, l, m)
+            self.mergeSort(arr, m + 1, r)
+            self.merge(arr, l, m, r)
