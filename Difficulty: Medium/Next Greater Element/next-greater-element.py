@@ -15,20 +15,34 @@ class Solution:
         
         
         # 
-        result = [-1]* len(arr)
+        # result = [-1]* len(arr)
         
-        stk = [ ]
+        # stk = [ ]
         
-        for i in range(len(arr)-1,-1,-1):
-            while stk and arr[i] >= stk[-1]:
-                stk.pop()
+        # for i in range(len(arr)-1,-1,-1):
+        #     while stk and arr[i] >= stk[-1]:
+        #         stk.pop()
                 
-            if stk:
-                result[i] = stk[-1]
+        #     if stk:
+        #         result[i] = stk[-1]
                 
             
-            stk.append(arr[i])
+        #     stk.append(arr[i])
         
-        return result
+        # return result
+        
+        
+        n = len(arr)
+        res = [-1] * n
+        stack = []  # will store indices
+    
+        for i in range(n):
+            while stack and arr[i] > arr[stack[-1]]:
+                idx = stack.pop()
+                res[idx] = arr[i]
+            stack.append(i)
+    
+        return res
+
         
         
