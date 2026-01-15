@@ -1,48 +1,36 @@
 class Solution:
     def nextLargerElement(self, arr):
         # code here
-        # filnd next greatest element 
-        # Brute Force
-        # n = len(arr)
-        # ans=[-1]*n
-        # for i in range(len(arr)):  #6   # fisrt pointer 
-        #     for j in range(i+1,len(arr)):#8 # secound pointer for chack the greater number
-        #         if arr[j] > arr[i]: # checking the condition
-        #             ans[i] = ans[j]
-        #             break # once we file the next greater element break the loop
-        
-        # return ans
-        
-        
-        # 
-        # result = [-1]* len(arr)
-        
-        # stk = [ ]
-        
-        # for i in range(len(arr)-1,-1,-1):
-        #     while stk and arr[i] >= stk[-1]:
-        #         stk.pop()
-                
-        #     if stk:
-        #         result[i] = stk[-1]
-                
-            
-        #     stk.append(arr[i])
-        
-        # return result
-        
-        
         n = len(arr)
-        res = [-1] * n
-        stack = []  # will store indices
-    
+        result = [-1] * n
+        stk = []
         for i in range(n):
-            while stack and arr[i] > arr[stack[-1]]:
-                idx = stack.pop()
-                res[idx] = arr[i]
-            stack.append(i)
-    
-        return res
-
+            while stk and arr[stk[-1]] < arr [i] :
+                idx = stk.pop()
+                result [ idx] = arr[i]
+            stk.append(i)
+            
+        return result
         
+        '''
+        n=5
         
+        i = 0 , stk=[] , result = [-1,-1,-1,-1,-1] ; condition will fail => stk[0]
+        i = 1 , stk [0] , result = [-1,-1,-1,-1,-1] ; stk and arr[0] < arr[1] , 1<3
+            condition is true 
+            idx = 0
+            result[0] = arr[1]  => result = [3,-1,-1,-1,] >stk = [1]
+        i =2 ,stk [1] , result = [3,-1,-1,-1,-1] ; stk  and arr[1] < arr[2] , 3<2
+            condition is false
+             result = [3,-1,-1,-1,] >stk = [1,2]
+        i=3 , stk= [1,2] ,  result = [3,-1,-1,-1,-1] , stk and arr[2] < arr[3] ,2<4
+            condition is true
+            result = [3,-1,4,-1] , stk = [1]
+            stk and arr[1] < arr[3] ,3<4
+            result = [3,4,4,-1] , stk = [0]
+            
+        i =4 ,stk =[] ,result = [3,4,4,-1] , stk= [4]
+        
+        return result = [3,4,4,-1]
+        
+        '''
